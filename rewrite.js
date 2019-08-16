@@ -18,8 +18,6 @@ template.innerHTML = \`${source.replace(/(^|[^`\\]*)\`/g, '$1\\`')}\`;
 moduleDocument.body.appendChild(template.content);
 export default moduleDocument;`;
 
-  console.info(docSource);
-
   if (!modules.length) {
     // short-circuit HTML module, just DOM
     return docSource;
