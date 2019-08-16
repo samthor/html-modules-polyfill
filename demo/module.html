@@ -1,0 +1,15 @@
+<div id="someStuff">
+  This is DOM from `module.html` <strong>Yay! 👋</strong>
+</div>
+<script type="module">
+
+import * as blah from './other.js';
+
+const foo = 'Hello, I am dog';
+export {foo};
+console.info('other exported', blah);
+console.debug('meta is', import.meta.url, import.meta.document);
+
+export const x = import.meta.document.querySelector('#someStuff');
+
+</script>

@@ -1,0 +1,1 @@
+console.info(`I'm just some other JS, which can be imported by the HTML module`);

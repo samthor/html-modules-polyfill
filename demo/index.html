@@ -1,0 +1,9 @@
+<h1>HTML module test</h1>
+
+<script type="module">
+
+import doc, * as rest from './module';
+console.info('top-level doc from module', doc);
+document.body.appendChild(rest.x);
+
+</script>

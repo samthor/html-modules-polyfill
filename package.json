@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "dhost": "^0.1.7",
+    "polka": "^0.5.2"
+  },
+  "dependencies": {
+    "jsdom": "^15.1.1",
+    "rollup": "^1.19.4"
+  }
+}
