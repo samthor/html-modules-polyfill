@@ -6,5 +6,12 @@
   "dependencies": {
     "jsdom": "^15.1.1",
     "rollup": "^1.19.4"
-  }
+  },
+  "name": "html-modules-polyfill",
+  "version": "0.1.0",
+  "description": "HTML Modules Rewriter",
+  "main": "rewrite.js",
+  "repository": "git@github.com:samthor/html-modules-polyfill.git",
+  "author": "Sam Thorogood <sam.thorogood@gmail.com>",
+  "license": "Apache-2.0"
 }
