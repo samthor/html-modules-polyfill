@@ -56,8 +56,10 @@ export { blogPost };
 
 # Implementation
 
-The rewriter uses JSDOM and Rollup to find and concatenate every `<script type="module">` found in the passed source, as well as providing the top-level `import.meta.document` to every script in the 
+The rewriter uses JSDOM and Rollup to find and concatenate every `<script type="module">` found in the passed source, as well as providing the top-level `import.meta.document` based on the HTML itself.
 It does not use Rollup in a _general-purpose_ way: further imports are left alone.
+
+Notably, the generated HTML still includes the source `<script type="module">`: it's not run inside a `<template>`.
 
 ## Explanation
 
