@@ -5,6 +5,8 @@ const polka = require('polka');
 const dhost = require('dhost');
 const rewrite = require('../rewrite.js');
 
+process.chdir(__dirname);
+
 polka()
   .get('/module', async (req, res) => {
 

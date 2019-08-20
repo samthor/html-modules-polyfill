@@ -9,6 +9,8 @@ const rollup = require('rollup');
  * context.
  */
 module.exports = async (source) => {
+  source = source.toString();  // support Buffer
+
   const parsed = new JSDOM(source);
   const modules = parsed.window.document.querySelectorAll('script[type="module"]');
 
