@@ -8,8 +8,9 @@ const rollup = require('rollup');
  * The rewrite doesn't require knowledge of the script's location or any other
  * context.
  */
-module.exports = async (source) => {
+module.exports = async (source, options=null) => {
   source = source.toString();  // support Buffer
+  options = Object.assign({rewriteDocument: false}, options);
 
   const parsed = new JSDOM(source);
   const modules = parsed.window.document.querySelectorAll('script[type="module"]');
@@ -36,7 +37,7 @@ export default moduleDocument;`;
   // This only needs to be done once, because Rollup doesn't try to interpolate import.meta.
   // TODO(samthor): We could eval() to create `import.meta` if this is a module browser that doesn't support it.
   // TODO(samthor): Further build tools won't respect the value etc.
-  const extendedDocSource = `${docSource}
+  const extendedDocSource = options.rewriteDocument ? docSource : `${docSource}
 import.meta.document = moduleDocument;
 `;
 
@@ -68,7 +69,9 @@ import.meta.document = moduleDocument;
     const escaped = src.replace(/\'/g, '\'');
     return `import '${escaped}';`;
   });
-  const entrySource = `export { default } from '${docImport}';\n${importStrings.join('\n')}`;
+  const entrySource = `import moduleDocument from '${docImport}';
+export default moduleDocument;
+${importStrings.join('\n')}`;
   const entryImport = pushVirtualSource(entrySource);
 
   const virtualPlugin = {
@@ -84,9 +87,15 @@ import.meta.document = moduleDocument;
     },
   };
 
+  const plugins = [virtualPlugin];
+  if (options.rewriteDocument) {
+    // Rewrite `import.meta.document` as further build tools just don't get it.
+    const rewriteDocumentPlugin = require('./rewrite-document-plugin.js');
+    plugins.push(rewriteDocumentPlugin);
+  }
   const bundle = await rollup.rollup({
     input: entryImport,
-    plugins: [virtualPlugin],
+    plugins,
   });
 
   const out = await bundle.generate({

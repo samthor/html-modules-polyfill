@@ -6,4 +6,4 @@ const rewrite = require('../rewrite.js');
 
 const p = path.join(__dirname, 'module.html');
 
-rewrite(fs.readFileSync(p)).then(console.info)
+rewrite(fs.readFileSync(p), {rewriteDocument: true}).then(console.info)
