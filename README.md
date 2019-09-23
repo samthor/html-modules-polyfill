@@ -73,7 +73,7 @@ External scripts are imported without re-exporting: i.e., `<script type="module 
 
 Modern browsers provide a unique `import.meta` to every JS module, so modifying _a single file_ by adding a `.document` property at run-time is fine.
 
-However, since most further build tools don't understand `import.meta.document` at all, rewritten HTML Modules that are later concatenated together will override each other's document.
+However, since most further build tools don't understand `import.meta.document` at all (although you can write [a plugin for Rollup](https://github.com/rollup/rollup/pull/2785) which does), rewritten HTML Modules that are later concatenated together will override each other's document.
 We should add a flag to the rewriter to use a local variable name instead (and rewrite usage) so that Rollup and other tools can play nice.
 
 Additionally, there's no source map support.

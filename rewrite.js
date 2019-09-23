@@ -33,9 +33,9 @@ export default moduleDocument;`;
     return key;
   };
 
-  // This only needs to be done once, because Rollup doesn't try to interpolate import.meta.
+  // This only needs to be done once, because Rollup doesn't try to interpolate import.meta unless
+  // you ask for it explicitly (see https://github.com/rollup/rollup/pull/2785).
   // TODO(samthor): We could eval() to create `import.meta` if this is a module browser that doesn't support it.
-  // TODO(samthor): Further build tools won't respect the value etc.
   const extendedDocSource = `${docSource}
 import.meta.document = moduleDocument;
 `;
