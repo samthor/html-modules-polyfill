@@ -4,7 +4,7 @@
     "polka": "^0.5.2"
   },
   "dependencies": {
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.5.0",
     "rollup": "^1.19.4"
   },
   "name": "html-modules-polyfill",
